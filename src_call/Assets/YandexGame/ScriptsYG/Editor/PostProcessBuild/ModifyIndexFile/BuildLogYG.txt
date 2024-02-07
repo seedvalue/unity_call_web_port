@@ -1,0 +1,2 @@
+Build path: D:/PROJECTS/UNITY/YandexGames/not_my/call_web_port/build
+Build number: 160

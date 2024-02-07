@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MoreGames>
+	<Version>1.0</Version>
+	<Android>
+  	<Blockot>
+			<AllGames>
+				<Action>
+					<NewGames>
+						<Game>
+								<Title>FrontlineSuperCommando</Title>
+								<PlayStoreLink>http://bit.ly/2kTsryc</PlayStoreLink>
+								<Large>http://blockot.com/games/moregames/blockot/FrontlineSuperCommando.jpg</Large>
+						</Game>						
+					</NewGames>
+					<OldGames>
+						<Game>
+					
+              <Title>SuperLimoTaxi2017</Title>
+							<PlayStoreLink>http://bit.ly/2ldvov6</PlayStoreLink>
+							<Large>http://blockot.com/games/moregames/blockot/SuperLimoTaxi2017.jpg</Large>
+						
+          </Game>					
+					</OldGames>
+				</Action>
+				<Simulations>
+					<NewGames>
+            <Game>
+					    <Title>JetSkiIslandAdventure</Title>
+							<PlayStoreLink>http://bit.ly/2mnEogv</PlayStoreLink>
+							<Large>http://blockot.com/games/moregames/blockot/JetSkiIslandAdventure.jpg</Large>
+            </Game>
+					</NewGames>
+					<OldGames>
+            <Game>
+						   <Title>USArmyTruckDriver</Title>
+							<PlayStoreLink>http://bit.ly/2kEwnCG</PlayStoreLink>
+							<Large>http://blockot.com/games/moregames/blockot/USArmyTruckDriver.jpg</Large>
+						</Game>
+					</OldGames>
+				</Simulations>
+			</AllGames>
+			<FeaturedGames>
+				  <Game>
+					  <Title>ValentineLimoTaxi2017</Title>
+					  <PlayStoreLink>http://bit.ly/2lUjPZB</PlayStoreLink>
+					  <Large>http://blockot.com/games/moregames/blockot/ValentineLimoTaxi2017.jpg</Large>
+				  </Game>
+			    <Game>
+					    <Title>JetSkiIslandAdventure</Title>
+							<PlayStoreLink>http://bit.ly/2mnEogv</PlayStoreLink>
+							<Large>http://blockot.com/games/moregames/blockot/JetSkiIslandAdventure.jpg</Large>
+            </Game>
+            <Game>
+						    <Title>USArmyTruckDriver</Title>
+							  <PlayStoreLink>http://bit.ly/2kEwnCG</PlayStoreLink>
+							  <Large>http://blockot.com/games/moregames/blockot/USArmyTruckDriver.jpg</Large>
+						</Game>
+			</FeaturedGames>
+		</Blockot>
+	</Android>
+	<iOS></iOS>
+</MoreGames>

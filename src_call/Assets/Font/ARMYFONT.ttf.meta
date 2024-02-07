@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: d880c671da9996d4c97d151676d89b04
+timeCreated: 1700875165
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  name:
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Stencil Army WW I
+  fontNames:
+  - Stencil Army WW I
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 49e0131ee31b6f2458624f70f21ea736, type: 3}
+  customCharacters:
+  fontRenderingMode: 0
+  output:
+    hasEmptyFontData: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName:
+  assetBundleVariant:
