@@ -267,21 +267,21 @@ public class UIController : MonoBehaviour
 		headShotsBonus.text = headshotsReward.ToString();
 		healthRemainingVal.text = healthRemaining + "%";
 		healthRemainingBonus.text = healthBonusReward.ToString();
-		buttonParent.transform.localScale = Vector3.zero;
+		//buttonParent.transform.localScale = Vector3.zero;
 		buttonParent.SetActive(true);
-		LeanTween.scale(buttonParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
-		levelClearHeading.transform.localScale = Vector3.one * 2.5f;
+		//LeanTween.scale(buttonParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//levelClearHeading.transform.localScale = Vector3.one * 2.5f;
 		levelClearHeading.SetActive(true);
-		LeanTween.scale(levelClearHeading, Vector3.one, 0.05f).setEase(LeanTweenType.linear);
-		totalRewardParent.transform.localScale = Vector3.zero;
+		//LeanTween.scale(levelClearHeading, Vector3.one, 0.05f).setEase(LeanTweenType.linear);
+		//totalRewardParent.transform.localScale = Vector3.zero;
 		totalRewardParent.SetActive(true);
-		LeanTween.scale(totalRewardParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
-		centerLine.transform.localScale = Vector3.zero;
+		//LeanTween.scale(totalRewardParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//centerLine.transform.localScale = Vector3.zero;
 		centerLine.SetActive(true);
-		LeanTween.scale(centerLine, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
-		enemiesKilledRow.transform.localScale = Vector3.zero;
+		//LeanTween.scale(centerLine, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//enemiesKilledRow.transform.localScale = Vector3.zero;
 		enemiesKilledRow.SetActive(true);
-		LeanTween.scale(enemiesKilledRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//LeanTween.scale(enemiesKilledRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		counterSound.Play();
 		while (num != enemiesReward)
 		{
@@ -290,15 +290,15 @@ public class UIController : MonoBehaviour
 			totalRewardText.text = num.ToString();
 		}
 		counterSound.Stop();
-		headShotsRow.transform.localScale = Vector3.zero;
+		//headShotsRow.transform.localScale = Vector3.zero;
 		headShotsRow.SetActive(true);
-		LeanTween.scale(headShotsRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//LeanTween.scale(headShotsRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		int num3 = num + headshotsReward;
 		num = num3;
 		totalRewardText.text = num.ToString();
-		healtBonusRow.transform.localScale = Vector3.zero;
+		//healtBonusRow.transform.localScale = Vector3.zero;
 		healtBonusRow.SetActive(true);
-		LeanTween.scale(healtBonusRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//LeanTween.scale(healtBonusRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		num3 = num + healthBonusReward;
 		counterSound.Play();
 		while (num != num3)

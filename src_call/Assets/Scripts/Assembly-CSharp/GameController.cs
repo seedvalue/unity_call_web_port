@@ -584,10 +584,43 @@ public class GameController : MonoBehaviour
 			CtrlYa.Instance.OnClickUiShowRewardAsk(() =>
 				{
 					Debug.LogError("хз что куда");
-					//MainMenuOnRewardSucces(100);
+					MainMenuOnRewardSucces(100);
+					
 				}, true
 			);
 		}
+	}
+	
+	private void MainMenuOnRewardSucces(int reward)
+	{
+		Debug.Log("MainMenuOnRewardSucces : " + reward);
+		addRewardAfterWatchingAd(reward);
+	}
+	
+	public void addRewardAfterWatchingAd(int amount)
+	{
+		StartCoroutine(showAddCurrencyParticles(Vector3.zero, amount, 0f));
+	}
+	
+	public IEnumerator showAddCurrencyParticles(Vector3 startPos, int amountToAd, float startWait)
+	{
+		Debug.Log("Тут скопировано с мейн меню контроллера, может не обновлться UI.Yj lj,fdkztncz");
+		yield return new WaitForSeconds(startWait);
+		//currencyToAdObj.GetComponentInChildren<Text>().text = amountToAd.ToString();
+		//currencyToAdObj.transform.localScale = Vector3.one * 1.5f;
+		//currencyToAdObj.SetActive(true);
+		//LeanTween.scale(currencyToAdObj, Vector3.one, 0.5f).setEase(LeanTweenType.linear);
+		//LeanTween.moveLocal(currencyToAdObj, new Vector3(500f, 323f, 0f), 0.5f).setEase(LeanTweenType.easeInBack);
+		yield return new WaitForSeconds(0.5f);
+		//spendCurrenyParticles.Emit(15);
+		//spendCurrenyParticles.GetComponent<AudioSource>().Play();
+		//currencyParent.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+		//LeanTween.scale(currencyParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
+		//currencyToAdObj.SetActive(false);
+		int totalDollars2 = PlayerPrefs.GetInt("Dollars", 0);
+		totalDollars2 += amountToAd;
+		PlayerPrefs.SetInt("Dollars", totalDollars2);
+		//totalDollarsText.text = totalDollars2.ToString();
 	}
 
 	public void Zooming()
@@ -599,6 +632,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	
+	
 	private void OnRewardedVideoCallBack(int _valueOfReward, string _rewardAmountType)
 	{
 		if (_rewardAmountType.Equals("DoubleReward"))

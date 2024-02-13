@@ -18,9 +18,6 @@ namespace _00_YaTutor
 
 
         #region Saves
-
-
-        
         
         public void GetLoad()
         {
@@ -279,18 +276,21 @@ namespace _00_YaTutor
         }
 
 
-        private void SetupInstance()
+        private bool SetupInstance()
         {
             if (CtrlYa.Instance == null)
             {
                 Instance = this;
                 transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
+                return true;
             }
             else
             {
                 Destroy(gameObject);
+                return false;
             }
+            return false;
         }
 
         private void OnEnable()
@@ -308,13 +308,13 @@ namespace _00_YaTutor
         private void Awake()
         {
             if(wndTutor)wndTutor.gameObject.SetActive(false);
-            else Debug.LogError("null");
+            else Debug.LogError("CtrlYa : wndTutor == null");
             if(wndRewardAsk)wndRewardAsk.SetActive(false);
-            else Debug.LogError("null");
+            else Debug.LogError("CtrlYa : wndRewardAsk == null");
             if(wndLoading)wndLoading.SetActive(false);
-            else Debug.LogError("null");
-            SetupInstance();
-            SetupButtonsRewardAsk();
+            else Debug.LogError("CtrlYa : wndLoading == null");
+            bool isOk = SetupInstance();
+            if(isOk)SetupButtonsRewardAsk();
           //  _audioListener = FindObjectOfType<AudioListener>();
         }
 
@@ -335,12 +335,12 @@ namespace _00_YaTutor
             Debug.Log("CtrlYa : OnSceneLoaded");
             //ShowLoadingWnd(false);
             //SoundCtrl.Inst.UnMuteAllAudio();
-            StartCoroutine(DelayedCo(2F));
+            StartCoroutine(DelayedSliderLoadingCo(2F));
         }
 
         
         //Ждем немного, звук не ломается, но реклама моргает при виде геймплея.
-        private IEnumerator DelayedCo(float time)
+        private IEnumerator DelayedSliderLoadingCo(float time)
         {
             if (sliderLoading == null)
             {
