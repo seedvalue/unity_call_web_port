@@ -96,7 +96,9 @@ public class MainMenuController : MonoBehaviour
 
 	public void updateDollarsText()
 	{
-		dollars = PlayerPrefs.GetInt("Dollars", 0);
+		Debug.Log("updateDollarsText : prefs dollares disabled  ");
+		//dollars = PlayerPrefs.GetInt("Dollars", 0);
+		if (CtrlYa.Instance) dollars = CtrlYa.Instance.GetDollars();
 		totalDollarsText.text = dollars.ToString();
 	}
 
@@ -142,10 +144,25 @@ public class MainMenuController : MonoBehaviour
 		currencyParent.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 		LeanTween.scale(currencyParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		currencyToAdObj.SetActive(false);
-		int totalDollars2 = PlayerPrefs.GetInt("Dollars", 0);
-		totalDollars2 += amountToAd;
-		PlayerPrefs.SetInt("Dollars", totalDollars2);
-		totalDollarsText.text = totalDollars2.ToString();
+
+		int totalDollares = -1;
+		Debug.Log("dollars save YA");
+		if (CtrlYa.Instance)
+		{
+			CtrlYa.Instance.SaveDollars(amountToAd);
+			totalDollares = CtrlYa.Instance.GetDollars();
+		}
+		totalDollarsText.text = totalDollares.ToString();
+	}
+
+	public void RefreshDollarsUiFromYandex()
+	{
+		int totalDollares = -1;
+		if (CtrlYa.Instance)
+		{
+			totalDollares = CtrlYa.Instance.GetDollars();
+		}
+		totalDollarsText.text = totalDollares.ToString();
 	}
 
 	public void BlurScreen()
@@ -154,7 +171,6 @@ public class MainMenuController : MonoBehaviour
 
 	private void RemoveAdsOnClick()
 	{
-		PlayerPrefs.SetString("RemoveAds", "true");
 	}
 
 	private void OnEnable()
@@ -164,7 +180,9 @@ public class MainMenuController : MonoBehaviour
 
 	private IEnumerator showMainMenu(float waitTime)
 	{
-		yield return new WaitForSeconds(waitTime);
+		// Sergei отключил
+		//yield return new WaitForSeconds(waitTime);
+		yield return new WaitForSeconds(0);
 		showTopBar();
 		mainMenuParent.SetActive(true);
 		if (PlayerPrefs.GetInt("StartCashAwarded", 0) == 0)
@@ -359,7 +377,6 @@ public class MainMenuController : MonoBehaviour
 
 	public void inAppBtnOnclick(int bundelIndex)
 	{
-		PlayerPrefs.SetString("RemoveAds", "true");
 		btnClick.Play();
 		if (bundelIndex == 1)
 		{
@@ -396,7 +413,6 @@ public class MainMenuController : MonoBehaviour
 			addCurrency(20000);
 		}
 		Debug.Log(sku);
-		PlayerPrefs.SetString("RemoveAds", "true");
 		/*
 		if(IntegrationManager.Instance)
 			IntegrationManager.Instance.OnPurchaseSucceedCallBack -= OnPurchaseSucceedCallBack;

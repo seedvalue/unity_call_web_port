@@ -14,6 +14,7 @@ public class FadeInController : MonoBehaviour
 
 	private void OnEnable()
 	{
+		return;
 		if (GetComponent<Image>() != null)
 		{
 			image = GetComponent<Image>();

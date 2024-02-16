@@ -79,6 +79,31 @@ public class WeaponPopupController : MonoBehaviour
 				gunsWarningSign.SetActive(true);
 			}
 		}
+
+		int levelCleared = 0;
+		if (CtrlYa.Instance)
+		{
+			levelCleared = CtrlYa.Instance.GetFinishedLevel();
+		}
+		else
+		{
+			Debug.LogError("WeaponPopupController : checkGunStats :  CtrlYa.Instance == null. when get level cleared");
+		}
+		
+		if (levelCleared >= 0)
+		{
+			grandesLockedBlock.SetActive(false);
+			grenadesUnlockBlock.SetActive(true);
+			grenadeQuanityText.text = PlayerPrefs.GetInt("Grenades", 0).ToString();
+			flashbangQuantityText.text = PlayerPrefs.GetInt("Flashbang", 0).ToString();
+		}
+		else
+		{
+			grandesLockedBlock.SetActive(true);
+			grenadesUnlockBlock.SetActive(false);
+		}
+		
+		/*
 		if (PlayerPrefs.GetInt("LevelsCleared", 0) >= 0)
 		{
 			grandesLockedBlock.SetActive(false);
@@ -91,6 +116,7 @@ public class WeaponPopupController : MonoBehaviour
 			grandesLockedBlock.SetActive(true);
 			grenadesUnlockBlock.SetActive(false);
 		}
+		*/
 	}
 
 	public void buyFlashbangOnClick()

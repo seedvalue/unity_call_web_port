@@ -13,9 +13,10 @@ public class UIElementAnimationController : MonoBehaviour
 	public LeanTweenType type = LeanTweenType.easeOutBack;
 
 	private void OnEnable()
-	{
-		GetComponent<RectTransform>().anchoredPosition = startPos;
-		Invoke("animateElement", startWait);
+	{ 
+		// Sergei Отключил
+		//	GetComponent<RectTransform>().anchoredPosition = startPos;
+	//	Invoke("animateElement", startWait);
 	}
 
 	private void animateElement()

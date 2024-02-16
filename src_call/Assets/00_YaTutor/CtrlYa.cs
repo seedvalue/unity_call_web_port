@@ -23,9 +23,13 @@ namespace _00_YaTutor
         {
            // var text = YandexGame.savesData.money.ToString();
            
+           
+           
            Debug.LogError("GetLoad : CHECK!");
            //Update UI levels
            //CtrlUi.Instance.OnSavingSGetedFromSdk();
+          var mainMenuController = GameObject.FindObjectOfType<MainMenuController>();
+          if (mainMenuController) mainMenuController.RefreshDollarsUiFromYandex();
         }
 
 
@@ -49,6 +53,34 @@ namespace _00_YaTutor
             YandexGame.savesData.unlockedLevels = levels;
             YandexGame.SaveProgress();
         }
+        
+        
+        // Call game
+        public void SaveFinishedLevel(int num)
+        {
+            YandexGame.savesData.lastFinishedLevel = num;
+            YandexGame.SaveProgress();
+        }
+
+        public int GetFinishedLevel()
+        {
+            return YandexGame.savesData.lastFinishedLevel;
+        }
+        
+        public void SaveDollars(int num)
+        {
+            YandexGame.savesData.dollars += num;
+            YandexGame.SaveProgress();
+        }
+
+        public int GetDollars()
+        {
+            return YandexGame.savesData.dollars;
+        }
+        
+        
+        
+        // END Call game
 
         public void SetLevelStarsAndSave(int level, int stars)
         {

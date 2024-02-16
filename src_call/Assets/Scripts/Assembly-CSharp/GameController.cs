@@ -251,7 +251,7 @@ public class GameController : MonoBehaviour
 			}
 			if (Input.GetKeyUp(KeyCode.Mouse0))
 			{
-				this.onFireBtnUp();
+				this.OnFireBtnUp();
 			}
 			// ZOOM
 			if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -287,6 +287,10 @@ public class GameController : MonoBehaviour
 
 	private bool IsHaveUiWhenFire()
 	{
+		if (CtrlYa.Instance)
+		{
+			if (CtrlYa.Instance.GetDevice() == CtrlYa.YaDevice.Mobile) return false;
+		}
 		if (_curEventSys == null)
 		{
 			_curEventSys = GameObject.FindObjectOfType<EventSystem>();
@@ -303,9 +307,11 @@ public class GameController : MonoBehaviour
 	public void OnFireBtnDown()
 	{
 		Debug.Log("onFireBtnDown");
-		if(IsHaveUiWhenFire()) return;
-		
-		
+		if (IsHaveUiWhenFire())
+		{
+			Debug.Log("IsHaveUiWhenFire IGNORE = " + IsHaveUiWhenFire().ToString());
+			return;
+		}
 		
 		if (!isGrenadeSelected)
 		{
@@ -335,8 +341,9 @@ public class GameController : MonoBehaviour
 		music.PlayOneShot(flashSound[Random.Range(0, flashSound.Length)]);
 	}
 
-	public void onFireBtnUp()
+	public void OnFireBtnUp()
 	{
+		Debug.Log("OnFireBtnUp");
 		input.input.fireHold = false;
 	}
 
@@ -403,11 +410,21 @@ public class GameController : MonoBehaviour
 		headShots++;
 	}
 
-	public void setMissionCompleted()
+	public void SetMissionCompleted()
 	{
 		input.input.fireHold = false;
-		StartCoroutine(fadeOutMusic());
-		ui.showMissionCompleteUI(level.enemiesKilled, level.enemiesKilled * 100, headShots, headShots * 50, playerHP, (int)((float)playerHP * 0.5f));
+		if(music) music.volume = 0;
+		else Debug.LogError("setMissionCompleted : music == NULL");
+		Debug.Log("Sergei disabled coroutine");
+		//StartCoroutine(fadeOutMusic());
+		if (ui)
+		{
+			ui.showMissionCompleteUI(level.enemiesKilled, level.enemiesKilled * 100, headShots, headShots * 50, playerHP, (int)((float)playerHP * 0.5f));
+		}
+		else
+		{
+			Debug.LogError("UI == NULL");
+		}
 	}
 
 	public void takePlayerDamage(int damageVal)
@@ -555,9 +572,21 @@ public class GameController : MonoBehaviour
 	private void clearBombLevel()
 	{
 		Time.timeScale = 0f;
-		if (PlayerPrefs.GetInt("LevelsCleared") < Globals.currentLevelNumber)
+
+		int levelsCleared = 0;
+		if (CtrlYa.Instance)
 		{
-			PlayerPrefs.SetInt("LevelsCleared", Globals.currentLevelNumber);
+			levelsCleared = CtrlYa.Instance.GetFinishedLevel();
+		}
+		else
+		{
+			Debug.LogError("clearBombLevel : CtrlYa.Instance == NULL");
+		}
+		
+		
+		if (levelsCleared < Globals.currentLevelNumber)
+		{
+			CtrlYa.Instance.SaveFinishedLevel(Globals.currentLevelNumber);
 		}
 		ui.plantBombCompletedParent.SetActive(true);
 	}

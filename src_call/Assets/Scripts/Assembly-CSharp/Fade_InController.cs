@@ -10,7 +10,8 @@ public class Fade_InController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		StartCoroutine(fadeIn());
+		//Sergei откулбчил
+		//StartCoroutine(fadeIn());
 		Debug.Log("Fading in");
 	}
 

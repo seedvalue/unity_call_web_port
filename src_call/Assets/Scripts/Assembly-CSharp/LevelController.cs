@@ -77,6 +77,7 @@ public class LevelController : MonoBehaviour
 
 	public void EnemyKilled(Transform enemy)
 	{
+		Debug.Log("LevelController : EnemyKilled ");
 		enemiesKilled++;
 		currentWaveEnemiesKilled++;
 		if (currentWaveEnemiesKilled >= currentPointPlayers)
@@ -84,10 +85,19 @@ public class LevelController : MonoBehaviour
 			currentWaveEnemiesKilled = 0;
 			ChangePlayerPosition();
 		}
+		
 		if (enemiesKilled >= totalEnemiesCount)
 		{
-			gc.setMissionCompleted();
+			if (gc)
+			{
+				gc.SetMissionCompleted();
+			}
+			else
+			{
+				Debug.LogError("EnemyKilled : gc == NULL");
+			}
 		}
+		
 		Vector3 position = gc.fpsPlayer.position;
 		position.z += Vector3.Distance(gc.fpsPlayer.position, enemy.position) / 10f;
 		AudioSource.PlayClipAtPoint(gc.deathClips[Random.Range(0, gc.deathClips.Length)], position);

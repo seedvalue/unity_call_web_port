@@ -6,6 +6,8 @@ public class FadeOutController : MonoBehaviour
 {
 	private void OnEnable()
 	{
+		return;
+		//Sergei отключил
 		StartCoroutine(fadeOut());
 	}
 

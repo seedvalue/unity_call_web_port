@@ -17,7 +17,11 @@ namespace YG
         public bool[] openLevels = new bool[3];
 
         public int unlockedLevels;
-        
+
+
+        //Call game
+        public int lastFinishedLevel;
+        public int dollars;
         // Ваши сохранения
 
         // ...

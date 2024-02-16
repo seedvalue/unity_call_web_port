@@ -180,11 +180,12 @@ public class UIController : MonoBehaviour
 	public IEnumerator showLevelStartDetails(string message)
 	{
 		missionDetailText.text = message;
-		startMissionBtn.transform.localScale = Vector3.zero;
-		yield return new WaitForSeconds(1.5f);
+		//startMissionBtn.transform.localScale = Vector3.zero;
+		//yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(0f);
 		levelStartParent.SetActive(true);
 		startMissionBtn.SetActive(true);
-		LeanTween.scale(startMissionBtn, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
+		//LeanTween.scale(startMissionBtn, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
 		if (CtrlYa.Instance)
 		{
 			CtrlYa.Instance.SetCursorLocked(false);
@@ -244,75 +245,127 @@ public class UIController : MonoBehaviour
 
 	public void showMissionCompleteUI(int enemiesKilled, int enemiesReward, int headShots, int headshotsReward, int healthRemaining, int healthBonusReward)
 	{
+		var num = 0;
+		var num2 = 0f;
+		if(hudParent)hudParent.SetActive(false);
+		else Debug.LogError("showMissionCompleteUI : hudParent == null");
+		
+		
+		Debug.Log("PREFS !!! disabled");
 		if (CtrlYa.Instance)
 		{
-			Debug.LogError("TO NEW SDK CtrlGamePush.Instance == NULL");
-			//CtrlGamePush.Instance.SetCursorLocked(false);
-		} else Debug.LogError("CtrlGamePush.Instance == NULL");
-		
-		
-		int num = 0;
-		float num2 = 0f;
-		hudParent.SetActive(false);
+			CtrlYa.Instance.SaveFinishedLevel(Globals.currentLevelNumber);
+			CtrlYa.Instance.SaveDollars(totalTemp);
+		}
+		else Debug.LogError("showMissionCompleteUI : CtrlYa.Instance == NULL");
+
+		/*
 		if (PlayerPrefs.GetInt("LevelsCleared", 0) < Globals.currentLevelNumber)
 		{
 			PlayerPrefs.SetInt("LevelsCleared", Globals.currentLevelNumber);
-		}
+		}*/
+		
 		totalTemp = enemiesReward + healthBonusReward + headshotsReward;
-		PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
-		missionCompleteParent.SetActive(true);
-		enemiesKilledVal.text = enemiesKilled.ToString();
-		enemiesKilledBonus.text = enemiesReward.ToString();
-		headShotsVal.text = headShots.ToString();
-		headShotsBonus.text = headshotsReward.ToString();
-		healthRemainingVal.text = healthRemaining + "%";
-		healthRemainingBonus.text = healthBonusReward.ToString();
+		//PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
+		if(missionCompleteParent)missionCompleteParent.SetActive(true);
+		else Debug.LogError("missionCompleteParent == null");
+		
+		if(enemiesKilledVal)enemiesKilledVal.text = enemiesKilled.ToString();
+		else Debug.LogError("enemiesKilledVal == null");
+		
+		if(enemiesKilledBonus)enemiesKilledBonus.text = enemiesReward.ToString();
+		else Debug.LogError("enemiesKilledBonus == null");
+		
+		if(headShotsVal)headShotsVal.text = headShots.ToString();
+		else Debug.LogError("headShotsVal == null");
+		
+		if(headShotsBonus)headShotsBonus.text = headshotsReward.ToString();
+		else Debug.LogError("headShotsBonus == null");
+		
+		if(healthRemainingVal)healthRemainingVal.text = healthRemaining + "%";
+		else Debug.LogError("healthRemainingVal == null");
+
+		
+		if(healthRemainingBonus)healthRemainingBonus.text = healthBonusReward.ToString();
+		else Debug.LogError("healthRemainingBonus == null");
+
 		//buttonParent.transform.localScale = Vector3.zero;
-		buttonParent.SetActive(true);
+		if(buttonParent)buttonParent.SetActive(true);
+		else Debug.LogError("buttonParent == null");
+		
 		//LeanTween.scale(buttonParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		//levelClearHeading.transform.localScale = Vector3.one * 2.5f;
-		levelClearHeading.SetActive(true);
+		if(levelClearHeading)levelClearHeading.SetActive(true);
+		else Debug.LogError("levelClearHeading == null");
+
 		//LeanTween.scale(levelClearHeading, Vector3.one, 0.05f).setEase(LeanTweenType.linear);
 		//totalRewardParent.transform.localScale = Vector3.zero;
-		totalRewardParent.SetActive(true);
+		if(totalRewardParent)totalRewardParent.SetActive(true);
+		else Debug.LogError("totalRewardParent == null");
+
 		//LeanTween.scale(totalRewardParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		//centerLine.transform.localScale = Vector3.zero;
-		centerLine.SetActive(true);
+		if(centerLine)centerLine.SetActive(true);
+		else Debug.LogError("centerLine == null");
+
 		//LeanTween.scale(centerLine, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		//enemiesKilledRow.transform.localScale = Vector3.zero;
-		enemiesKilledRow.SetActive(true);
+		if(enemiesKilledRow)enemiesKilledRow.SetActive(true);
+		else Debug.LogError("enemiesKilledRow == null");
 		//LeanTween.scale(enemiesKilledRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
-		counterSound.Play();
+		
+		//if(counterSound)counterSound.Play();
+		//else Debug.LogError("counterSound == null");
+		
+		
+		
+		
 		while (num != enemiesReward)
 		{
 			num2 = Mathf.MoveTowards(num2, enemiesReward, 500f * Time.deltaTime);
 			num = (int)num2;
-			totalRewardText.text = num.ToString();
+			if(totalRewardText)totalRewardText.text = num.ToString();
+			else Debug.LogError("totalRewardText == null");
 		}
-		counterSound.Stop();
+		
+		//if(counterSound)counterSound.Stop();
 		//headShotsRow.transform.localScale = Vector3.zero;
-		headShotsRow.SetActive(true);
+		
+		if(headShotsRow)headShotsRow.SetActive(true);
+		else Debug.LogError("headShotsRow == null");
+
 		//LeanTween.scale(headShotsRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		int num3 = num + headshotsReward;
 		num = num3;
-		totalRewardText.text = num.ToString();
+		
+		if(totalRewardText)totalRewardText.text = num.ToString();
+		else Debug.LogError("totalRewardText == null");
+		
 		//healtBonusRow.transform.localScale = Vector3.zero;
-		healtBonusRow.SetActive(true);
+		if(healtBonusRow)healtBonusRow.SetActive(true);
+		else Debug.LogError("healtBonusRow == null");
+
 		//LeanTween.scale(healtBonusRow, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		num3 = num + healthBonusReward;
-		counterSound.Play();
+		if(counterSound)counterSound.Play();
+		
+		Debug.Log("тут ошибка! висло тут");
+		/*
 		while (num != num3)
 		{
 			num2 = Mathf.MoveTowards(num, num3, 100f * Time.deltaTime);
 			num = (int)num2;
-			totalRewardText.text = num.ToString();
+			if(totalRewardText)totalRewardText.text = num.ToString();
 		}
-		counterSound.Stop();
+		*/
+		
+		if(totalRewardText)totalRewardText.text = num3.ToString();
+		
+		
+		if(counterSound)counterSound.Stop();
 		totalRewardEarned = num;
 		
-
 		Debug.Log("on game complite");
-		
 	}
 
 	public void showGameOver()
@@ -362,10 +415,16 @@ public class UIController : MonoBehaviour
 	public void showHostageLevelComplete()
 	{
 		hudParent.SetActive(false);
-		if (PlayerPrefs.GetInt("LevelsCleared") < Globals.currentLevelNumber)
+		int levelsCleared = 0;
+		if (CtrlYa.Instance)
 		{
-			PlayerPrefs.SetInt("LevelsCleared", Globals.currentLevelNumber);
+			levelsCleared = CtrlYa.Instance.GetFinishedLevel();
+			if (levelsCleared < Globals.currentLevelNumber)
+			{
+				CtrlYa.Instance.SaveFinishedLevel(Globals.currentLevelNumber);
+			}
 		}
+		
 		hostageLevelCompleteParent.SetActive(true);
 	}
 
@@ -461,7 +520,13 @@ public class UIController : MonoBehaviour
 		totalRewardText.text = totalRewardEarned.ToString();
 		doubleRewardBtn.interactable = false;
 		Debug.Log("totalTemp: " + totalTemp);
-		PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
+		Debug.Log("PREFS DISABLED dollares");
+		//PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
+		if (CtrlYa.Instance)
+		{
+			CtrlYa.Instance.SaveDollars(totalTemp);
+		}
+		else Debug.LogError("doubleReward : CtrlYa.Instance == null");
 	}
 
 	private void SetSliderValue()

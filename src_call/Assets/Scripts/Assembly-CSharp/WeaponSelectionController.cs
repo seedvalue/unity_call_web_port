@@ -1,3 +1,4 @@
+using _00_YaTutor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,7 +112,9 @@ public class WeaponSelectionController : MonoBehaviour
 
 	public void purchaseWeapon(int index)
 	{
-		int @int = PlayerPrefs.GetInt("Dollars", 0);
+		Debug.Log("prefs disabled");
+		//int @int = PlayerPrefs.GetInt("Dollars", 0);
+		int @int = CtrlYa.Instance.GetDollars();
 		if (@int <= weapons[index].gunPrice)
 		{
 			return;
@@ -120,6 +123,7 @@ public class WeaponSelectionController : MonoBehaviour
 		PlayerPrefs.SetInt("SelectedGunIndex", index);
 		PlayerPrefs.SetInt("Gun" + index + "Bought", 1);
 		PlayerPrefs.SetInt("Dollars", @int - weapons[index].gunPrice);
+		CtrlYa.Instance.SaveDollars(-weapons[index].gunPrice);
 		mainMenu.updateDollarsText();
 		mainMenu.showSpendCurrencyParticles();
 		weapons[index].selectButton.SetActive(false);

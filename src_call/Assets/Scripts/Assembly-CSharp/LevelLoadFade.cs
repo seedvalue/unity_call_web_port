@@ -13,6 +13,8 @@ public class LevelLoadFade : MonoBehaviour
 
 	public void FadeAndLoadLevel(Color color, float fadeLength, bool fadeIn)
 	{
+		// Sergei отключил
+		return;
 		LevelLoadFadeobj.layer = 14;
 		fadeImage.color = color;
 		LevelLoadFadeobj.SetActive(true);
