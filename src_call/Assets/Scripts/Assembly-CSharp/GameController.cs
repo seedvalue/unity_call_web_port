@@ -236,11 +236,11 @@ public class GameController : MonoBehaviour
 				this.Jump(false);
 			}
 			// SIT
-			if (Input.GetKeyDown(KeyCode.LeftControl))
+			if (Input.GetKeyDown(KeyCode.C))
 			{
 				this.Crouch(true);
 			}
-			if (Input.GetKeyUp(KeyCode.LeftControl))
+			if (Input.GetKeyUp(KeyCode.C))
 			{
 				this.Crouch(false);
 			}

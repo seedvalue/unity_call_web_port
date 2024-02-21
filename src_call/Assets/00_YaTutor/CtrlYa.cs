@@ -56,9 +56,15 @@ namespace _00_YaTutor
         
         
         // Call game
-        public void SaveFinishedLevel(int num)
+        public void SaveFinishedLevel(int finishedLevelNum)
         {
-            YandexGame.savesData.lastFinishedLevel = num;
+            var lastSaved = GetFinishedLevel();
+            if (finishedLevelNum <= lastSaved)
+            {
+                Debug.Log("CtrlYa : SaveFinishedLevel : finishedLevelNum <= lastSaved. Ignore saving");
+                return;
+            }
+            YandexGame.savesData.lastFinishedLevel = finishedLevelNum;
             YandexGame.SaveProgress();
         }
 
@@ -71,6 +77,7 @@ namespace _00_YaTutor
         {
             YandexGame.savesData.dollars += num;
             YandexGame.SaveProgress();
+            GetLoad(); //Update UI
         }
 
         public int GetDollars()

@@ -252,12 +252,7 @@ public class UIController : MonoBehaviour
 		
 		
 		Debug.Log("PREFS !!! disabled");
-		if (CtrlYa.Instance)
-		{
-			CtrlYa.Instance.SaveFinishedLevel(Globals.currentLevelNumber);
-			CtrlYa.Instance.SaveDollars(totalTemp);
-		}
-		else Debug.LogError("showMissionCompleteUI : CtrlYa.Instance == NULL");
+		
 
 		/*
 		if (PlayerPrefs.GetInt("LevelsCleared", 0) < Globals.currentLevelNumber)
@@ -360,10 +355,18 @@ public class UIController : MonoBehaviour
 		*/
 		
 		if(totalRewardText)totalRewardText.text = num3.ToString();
-		
+		if (CtrlYa.Instance)
+		{
+			CtrlYa.Instance.SaveFinishedLevel(Globals.currentLevelNumber);
+			Debug.Log("reaward after finish level : num3 = " + num3);
+			CtrlYa.Instance.SaveDollars(num3);
+		}
+		else Debug.LogError("showMissionCompleteUI : CtrlYa.Instance == NULL");
 		
 		if(counterSound)counterSound.Stop();
 		totalRewardEarned = num;
+		
+		
 		
 		Debug.Log("on game complite");
 	}
