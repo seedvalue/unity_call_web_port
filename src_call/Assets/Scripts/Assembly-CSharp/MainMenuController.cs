@@ -97,7 +97,6 @@ public class MainMenuController : MonoBehaviour
 	public void updateDollarsText()
 	{
 		Debug.Log("updateDollarsText : prefs dollares disabled  ");
-		//dollars = PlayerPrefs.GetInt("Dollars", 0);
 		if (CtrlYa.Instance) dollars = CtrlYa.Instance.GetDollars();
 		totalDollarsText.text = dollars.ToString();
 	}

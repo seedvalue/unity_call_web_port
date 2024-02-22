@@ -226,59 +226,68 @@ public class GameController : MonoBehaviour
 
 		if (CtrlYa.Instance && CtrlYa.Instance.GetDevice() == CtrlYa.YaDevice.PC)
 		{
-			// JUMP
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Time.timeScale < 1F)
 			{
-				this.Jump(true);
+				//Debug.Log("Ignoring input when game Time.timeScale < 1F");
+				return;
 			}
-			if (Input.GetKeyUp(KeyCode.Space))
-			{
-				this.Jump(false);
-			}
-			// SIT
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				this.Crouch(true);
-			}
-			if (Input.GetKeyUp(KeyCode.C))
-			{
-				this.Crouch(false);
-			}
-			// FIRE
-			if (Input.GetKeyDown(KeyCode.Mouse0))
-			{
-				this.OnFireBtnDown();
-			}
-			if (Input.GetKeyUp(KeyCode.Mouse0))
-			{
-				this.OnFireBtnUp();
-			}
-			// ZOOM
-			if (Input.GetKeyDown(KeyCode.Mouse1))
-			{
-				this.Zooming();
-			}
-			// GRENADE
-			if (Input.GetKeyDown(KeyCode.G))
-			{
-				this.throughGrenade(true);
-			}
-			if (Input.GetKeyUp(KeyCode.G))
-			{
-				this.throughGrenade(false);
-			}
-			// RELOAD
-			if (Input.GetKeyUp(KeyCode.R))
-			{
-				this.reloadWeapon();
-			}
-			// PAUSE
-			if (Input.GetKeyUp(KeyCode.Escape))
-			{
-				this.pauseGameOnClick();
-			}
+			UpdatePCInputs();
 		}
-		
+	}
+
+	private void UpdatePCInputs()
+	{
+		// JUMP
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			this.Jump(true);
+		}
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			this.Jump(false);
+		}
+		// SIT
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			this.Crouch(true);
+		}
+		if (Input.GetKeyUp(KeyCode.C))
+		{
+			this.Crouch(false);
+		}
+		// FIRE
+		if (Input.GetKeyDown(KeyCode.Mouse0))
+		{
+			this.OnFireBtnDown();
+		}
+		if (Input.GetKeyUp(KeyCode.Mouse0))
+		{
+			this.OnFireBtnUp();
+		}
+		// ZOOM
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			this.Zooming();
+		}
+		// GRENADE
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			this.throughGrenade(true);
+		}
+		if (Input.GetKeyUp(KeyCode.G))
+		{
+			this.throughGrenade(false);
+		}
+		// RELOAD
+		if (Input.GetKeyUp(KeyCode.R))
+		{
+			this.reloadWeapon();
+		}
+		// PAUSE
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			this.pauseGameOnClick();
+		}
 	}
 
 
@@ -646,9 +655,7 @@ public class GameController : MonoBehaviour
 		//currencyParent.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 		//LeanTween.scale(currencyParent, Vector3.one, 0.2f).setEase(LeanTweenType.easeOutBack);
 		//currencyToAdObj.SetActive(false);
-		int totalDollars2 = PlayerPrefs.GetInt("Dollars", 0);
-		totalDollars2 += amountToAd;
-		PlayerPrefs.SetInt("Dollars", totalDollars2);
+		CtrlYa.Instance.SaveDollars(amountToAd);
 		//totalDollarsText.text = totalDollars2.ToString();
 	}
 

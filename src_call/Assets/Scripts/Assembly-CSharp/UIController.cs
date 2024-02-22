@@ -250,18 +250,9 @@ public class UIController : MonoBehaviour
 		if(hudParent)hudParent.SetActive(false);
 		else Debug.LogError("showMissionCompleteUI : hudParent == null");
 		
-		
 		Debug.Log("PREFS !!! disabled");
 		
-
-		/*
-		if (PlayerPrefs.GetInt("LevelsCleared", 0) < Globals.currentLevelNumber)
-		{
-			PlayerPrefs.SetInt("LevelsCleared", Globals.currentLevelNumber);
-		}*/
-		
 		totalTemp = enemiesReward + healthBonusReward + headshotsReward;
-		//PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
 		if(missionCompleteParent)missionCompleteParent.SetActive(true);
 		else Debug.LogError("missionCompleteParent == null");
 		
@@ -524,7 +515,6 @@ public class UIController : MonoBehaviour
 		doubleRewardBtn.interactable = false;
 		Debug.Log("totalTemp: " + totalTemp);
 		Debug.Log("PREFS DISABLED dollares");
-		//PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) + totalTemp);
 		if (CtrlYa.Instance)
 		{
 			CtrlYa.Instance.SaveDollars(totalTemp);

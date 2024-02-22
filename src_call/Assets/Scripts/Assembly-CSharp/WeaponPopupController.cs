@@ -122,10 +122,10 @@ public class WeaponPopupController : MonoBehaviour
 	public void buyFlashbangOnClick()
 	{
 		mainMenu.btnClick.Play();
-		int @int = PlayerPrefs.GetInt("Dollars", 0);
+		int @int = CtrlYa.Instance.GetDollars();
 		if (@int >= 600)
 		{
-			PlayerPrefs.SetInt("Dollars", @int - 600);
+			CtrlYa.Instance.SaveDollars(-600);
 			mainMenu.updateDollarsText();
 			mainMenu.showSpendCurrencyParticles();
 			int int2 = PlayerPrefs.GetInt("Flashbang", 0);
@@ -142,10 +142,10 @@ public class WeaponPopupController : MonoBehaviour
 	public void buyGrenadeOnClick()
 	{
 		mainMenu.btnClick.Play();
-		int @int = PlayerPrefs.GetInt("Dollars", 0);
+		int @int = CtrlYa.Instance.GetDollars();
 		if (@int >= 600)
 		{
-			PlayerPrefs.SetInt("Dollars", @int - 600);
+			CtrlYa.Instance.SaveDollars(-600);
 			mainMenu.updateDollarsText();
 			mainMenu.showSpendCurrencyParticles();
 			int int2 = PlayerPrefs.GetInt("Grenades", 0);

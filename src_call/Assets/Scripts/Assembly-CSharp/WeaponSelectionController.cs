@@ -113,7 +113,6 @@ public class WeaponSelectionController : MonoBehaviour
 	public void purchaseWeapon(int index)
 	{
 		Debug.Log("prefs disabled");
-		//int @int = PlayerPrefs.GetInt("Dollars", 0);
 		int @int = CtrlYa.Instance.GetDollars();
 		if (@int <= weapons[index].gunPrice)
 		{
@@ -122,7 +121,6 @@ public class WeaponSelectionController : MonoBehaviour
 		mainMenu.btnClick.Play();
 		PlayerPrefs.SetInt("SelectedGunIndex", index);
 		PlayerPrefs.SetInt("Gun" + index + "Bought", 1);
-		PlayerPrefs.SetInt("Dollars", @int - weapons[index].gunPrice);
 		CtrlYa.Instance.SaveDollars(-weapons[index].gunPrice);
 		mainMenu.updateDollarsText();
 		mainMenu.showSpendCurrencyParticles();
@@ -146,9 +144,10 @@ public class WeaponSelectionController : MonoBehaviour
 	public void PurchaseGun(int index)
 	{
 		Debug.Log("PurchaseGun : index = " + index);
-		if (weaponPrice[index] <= PlayerPrefs.GetInt("Dollars", 0))
+		int doll = CtrlYa.Instance.GetDollars();
+		if (weaponPrice[index] <= doll)
 		{
-			PlayerPrefs.SetInt("Dollars", PlayerPrefs.GetInt("Dollars", 0) - weaponPrice[index]);
+			CtrlYa.Instance.SaveDollars(-weaponPrice[index]);
 			PlayerPrefs.Save();
 			GunPurchased(index);
 		}
